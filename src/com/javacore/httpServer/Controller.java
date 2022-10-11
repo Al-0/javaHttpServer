@@ -63,6 +63,11 @@ public class Controller {
         sendResponse(t, response);
     }
 
+    public void deleteCat(HttpExchange t, Integer catIndex) throws IOException {
+        String response = cats.deleteCat(catIndex);
+        sendResponse(t, response);
+    }
+
     public static void parseQuery(String query, Map<String, Object> parameters) throws UnsupportedEncodingException {
 
         if (query != null) {

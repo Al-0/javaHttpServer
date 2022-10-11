@@ -39,5 +39,12 @@ public class Cats {
         System.out.println(data.size());
     }
 
-
+    public String deleteCat(Integer catIndex) {
+        if (data.containsKey(catIndex)){
+            data.remove(catIndex);
+            return "Cat with index " + catIndex.toString() + " has been removed";
+        } else {
+            return "No such cat with that index";
+        }
+    }
 }
