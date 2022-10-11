@@ -29,6 +29,7 @@ public class Handler implements HttpHandler {
                 }
                 break;
             case "PUT":
+                controller.updateCat(t);
                 break;
             default:
 

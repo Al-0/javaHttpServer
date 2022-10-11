@@ -68,6 +68,40 @@ public class Controller {
         sendResponse(t, response);
     }
 
+    public void updateCat(HttpExchange t) throws IOException {
+        // parse request
+        Map<String, Object> parameters = new HashMap<String, Object>();
+        InputStreamReader isr = new InputStreamReader(t.getRequestBody(), "utf-8");
+        BufferedReader br = new BufferedReader(isr);
+        String query = br.readLine();
+        parseQuery(query, parameters);
+
+        // send response
+        String response = "";
+        if (parameters.size() == 2) {
+            String newCatName = "";
+            Integer catIndex = -1;
+            for (String key : parameters.keySet()) {
+
+                if (key.equals("name")){
+                    newCatName = parameters.get(key).toString();
+                } else if (key.equals("index")) {
+                    catIndex = Integer.parseInt(parameters.get(key).toString());
+                }
+            }
+            if (catIndex != -1 && newCatName.length() > 0) {
+                response = cats.updateCat(catIndex, newCatName);
+            }
+            else {
+                response = "No name or index provided";
+            }
+        } else {
+            response = "Incorrect number of parameters";
+        }
+
+        sendResponse(t, response);
+    }
+
     public static void parseQuery(String query, Map<String, Object> parameters) throws UnsupportedEncodingException {
 
         if (query != null) {

@@ -29,14 +29,12 @@ public class Cats {
     }
 
     public HashMap<Integer, String> getCats(){
-        System.out.println(data.size());
         return data;
     }
 
     public void postCat(String newCat){
         data.put(indexCounter, newCat);
         indexCounter += 1;
-        System.out.println(data.size());
     }
 
     public String deleteCat(Integer catIndex) {
@@ -45,6 +43,16 @@ public class Cats {
             return "Cat with index " + catIndex.toString() + " has been removed";
         } else {
             return "No such cat with that index";
+        }
+    }
+
+    public String updateCat(Integer catIndex, String catName) {
+        if (data.containsKey(catIndex)) {
+            data.put(catIndex, catName);
+            return "Cat with index " + catIndex.toString() + " has been successfully updated to " + catName;
+        }
+        else {
+            return "No cat with such an index was found";
         }
     }
 }
